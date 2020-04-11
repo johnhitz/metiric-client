@@ -1,3 +1,7 @@
 body {
   background: rgb(196,196,196);
 }
+
+.container {
+  margin: 2em;
+}

@@ -1,0 +1,13 @@
+span {
+  margin: 0 1em 1em 0;
+  width: 10em;
+}
+
+li {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+}

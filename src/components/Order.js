@@ -1,4 +1,7 @@
 import React from 'react'
+import OrderForm from './OrderForm'
+import CustomerList from './CustomerList'
+
 let baseURL = process.env.REACT_APP_BASEURL
 if(process.env.REACT_APP_BASEURL === 'dev') {
   baseURL = 'http://localhost:3333'
@@ -10,27 +13,51 @@ export default class Order extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      customer: {}
+      customer: {},
+      customers: []
     }
+    this.getCustomer = this.getCustomer.bind(this)
+    this.getCustomers = this.getCustomers.bind(this)
+    this.setCustomer = this.setCustomer.bind(this)
   }
   componentDidMount(){
+    this.getCustomers()
   }
   async getCustomer(name){
   try {
     let response = await fetch(`${baseURL}/customer/name/${name}`)
     let data = await response.json()
     this.setState({customer: data})
-    console.log(this.state);
+    // console.log(this.state);
   } catch(e) {
     console.error(e)
     }
   }
-  render() {
+  setCustomer(customer){
+    this.setState({customer: customer})
+  }
+  async getCustomers(){
+    try {
+      let response = await fetch(`${baseURL}/customers`)
+      let data = await response.json()
+      this.setState({customers: data})
+      console.log(this.state);
+    } catch(e) {
 
+    }
+  }
+  render() {
+    console.log(`My customer state is: `, this.state.customer);
     return (
       <>
+        <CustomerList
+          customers={this.state.customers}
+          setCustomer={this.setCustomer}
+        />
         <h1>Order</h1>
-        <button onClick={() => {this.getCustomer('Metor Farm llc')}}>Get It</button>
+        <OrderForm
+          customer={this.state.customer}
+        />
       </>
     )
   }
