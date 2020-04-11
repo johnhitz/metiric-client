@@ -4,9 +4,9 @@ export default class CustomerForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      _id: '',
       name: '',
       contact: '',
-      location: '',
       cell_phone: '',
       home_phone: '',
       alt_phone: '',
@@ -17,24 +17,30 @@ export default class CustomerForm extends React.Component {
   handleChange(event) {
     this.setState({ [event.currentTarget.id]: event.currentTarget.value })
   }
-  updateState(customer) {
-    console.log(`This customer is pissing me off `, customer);
-    this.setState({name: customer.name})
-  }
-  // async updateState(customer){
-  //   try {
-  //     let data = await customer
-  //       console.log(`Why is this: `, data);
-  //       // this.setState({name: customer.name})
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
+  // updateState(customer) {
+  //   console.log(`This customer is pissing me off `, customer);
+  //   this.setState({name: customer.name})
   // }
+  async updateState(customer){
+    try {
+      let data = await customer
+        this.setState({
+          _id: data._id,
+          name: data.name,
+          contact: data.contact,
+          cell_phone: data.cell_phone,
+          home_phone: data.home_phone,
+          alt_phone: data.alt_phone,
+          email: data.email
+        })
+    } catch (e) {
+      console.error(e)
+    }
+  }
   render(){
-    console.log('mystateis', this.state);
-    const { name, contact, location } = this.props.customer
-    if(name !== undefined){this.updateState(this.props.costomer)}
-    console.log(`But this is: `, this.props.customer);
+    const {name, location} = this.props.customer
+    if(name !== this.state.name){this.updateState(this.props.customer)}
+    console.log("Form State: ", this.state);
     return(
       <>
         <h1>Customer</h1>
@@ -54,16 +60,43 @@ export default class CustomerForm extends React.Component {
             id="contact"
             name="contact"
             value={this.state.contact}
-            placeholder="Customer Name"
+            placeholder="Contact"
             onChange={this.handleChange}
           />
-          <label htmlFor="location"></label>
+          <label htmlFor="cell_phone"></label>
           <input
             type="text"
-            id="location"
-            name="location"
-            value={this.state.location}
-            placeholder="Customer Name"
+            id="cell_phone"
+            name="cell_phone"
+            value={this.state.cell_phone}
+            placeholder="Cell Phone Number"
+            onChange={this.handleChange}
+          />
+          <label htmlFor="home_phone"></label>
+          <input
+            type="text"
+            id="home_phone"
+            name="home_phone"
+            value={this.state.home_phone}
+            placeholder="Home Phone Number"
+            onChange={this.handleChange}
+          />
+          <label htmlFor="alt_phone"></label>
+          <input
+            type="text"
+            id="alt_phone"
+            name="alt_phone"
+            value={this.state.alt_phone}
+            placeholder="Alternate Phone Number"
+            onChange={this.handleChange}
+          />
+          <label htmlFor="email"></label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={this.state.email}
+            placeholder="email"
             onChange={this.handleChange}
           />
         </form>

@@ -41,13 +41,12 @@ export default class Order extends React.Component {
       let response = await fetch(`${baseURL}/customers`)
       let data = await response.json()
       this.setState({customers: data})
-      console.log(this.state);
+      console.log("The state of this afair is: ",this.state);
     } catch(e) {
 
     }
   }
   render() {
-    console.log(`My customer state is: `, this.state.customer);
     return (
       <>
         <CustomerList
