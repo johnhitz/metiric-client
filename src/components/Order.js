@@ -1,5 +1,5 @@
 import React from 'react'
-import OrderForm from './OrderForm'
+import CustomerForm from './CustomerForm'
 import CustomerList from './CustomerList'
 
 let baseURL = process.env.REACT_APP_BASEURL
@@ -14,21 +14,22 @@ export default class Order extends React.Component {
     super(props)
     this.state = {
       customer: {},
-      customers: []
+      customers: [],
+      products: []
     }
     this.getCustomer = this.getCustomer.bind(this)
     this.getCustomers = this.getCustomers.bind(this)
-    this.setCustomer = this.setCustomer.bind(this)
+    this.getProducts = this.getProducts.bind(this)
   }
   componentDidMount(){
     this.getCustomers()
+    this.getProducts()
   }
   async getCustomer(name){
   try {
     let response = await fetch(`${baseURL}/customer/name/${name}`)
     let data = await response.json()
     this.setState({customer: data})
-    // console.log(this.state);
   } catch(e) {
     console.error(e)
     }
@@ -41,12 +42,34 @@ export default class Order extends React.Component {
       let response = await fetch(`${baseURL}/customers`)
       let data = await response.json()
       this.setState({customers: data})
-      console.log("The state of this afair is: ",this.state);
     } catch(e) {
-
+      console.error(e);
+    }
+  }
+  async getProducts(){
+    try {
+      let response = await fetch(`${baseURL}/products`)
+      console.log("Response: ", response);
+      let data = await response.json()
+      this.setState({products: data})
+    } catch(e) {
+      console.error(e);
+    }
+  }
+  async handleSubmit(event){
+    event.preventDefault()
+    try{
+      let response = await fetch(`${baseURL}/customer/add/name/contact/cell_phone/home_phone/alt_phone/email`)
+      let data = await response.json()
+      let customersCopy = this.state.customers
+      this.setState([...customersCopy. data])
+    }
+    catch(e){
+      console.error(e)
     }
   }
   render() {
+    console.log("My Groovy State: ", this.state);
     return (
       <>
         <CustomerList
@@ -54,8 +77,9 @@ export default class Order extends React.Component {
           setCustomer={this.setCustomer}
         />
         <h1>Order</h1>
-        <OrderForm
+        <CustomerForm
           customer={this.state.customer}
+          handleSubmit={this.handleSubmit}
         />
       </>
     )

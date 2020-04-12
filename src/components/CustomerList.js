@@ -12,7 +12,6 @@ export default class CustomerList extends React.Component{
           {
             this.props.customers.map((customer) => {
               let { _id, name, contact, cell_phone, home_phone, email, location } = customer
-              console.log("WTF? Over!", location);
               return(
                 <li className=" list-group-item list-group-item-action"
                   key={_id}
