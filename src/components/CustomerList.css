@@ -9,5 +9,7 @@ li {
   justify-content: space-between;
 }
 
-.name {
+.contact{
+  display: flex;
+  justify-content: space-around;
 }

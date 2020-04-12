@@ -70,7 +70,6 @@ export default class Order extends React.Component {
     }
   }
   render() {
-    console.log("My Groovy State: ", this.state);
     return (
       <>
         <CustomerList

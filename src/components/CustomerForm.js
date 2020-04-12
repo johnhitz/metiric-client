@@ -23,7 +23,8 @@ export default class CustomerForm extends React.Component {
         cell_phone: '',
         home_phone: '',
         alt_phone: '',
-        email: ''
+        email: '',
+        more: false
       })
     } catch (e) {
       console.error(e)
@@ -62,7 +63,7 @@ export default class CustomerForm extends React.Component {
               id="name"
               name="name"
               value={this.state.name}
-              placeholder="Customer Name"
+              placeholder="Client Name"
               onChange={this.handleChange}
             />
             <label htmlFor="contact"></label>
@@ -118,9 +119,12 @@ export default class CustomerForm extends React.Component {
           <button className="btn btn-primary"
             onClick={this.clearState}
           >Clear</button>
+          <button className="btn btn-danger"
+            onClick={this.clearState}
+          >Delete Customer</button>
+
           <input className="btn btn-primary" type="submit" value="Add Customer" />
         </form>
-        <h4>{name}</h4>
       </>
     )
   }
