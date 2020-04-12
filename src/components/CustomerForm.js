@@ -53,7 +53,7 @@ export default class CustomerForm extends React.Component {
     if(name !== this.state.name){this.updateState(this.props.customer)}
     return(
       <>
-        <h1>Customer</h1>
+        <h1>Customer Form</h1>
         <form onSubmit={this.props.handleSubmit, this.clearState}>
           <div className="form-group">
             <label htmlFor="name"></label>

@@ -17,6 +17,7 @@ export default class Order extends React.Component {
       customers: [],
       products: []
     }
+    this.setCustomer = this.setCustomer.bind(this)
     this.getCustomer = this.getCustomer.bind(this)
     this.getCustomers = this.getCustomers.bind(this)
     this.getProducts = this.getProducts.bind(this)
@@ -61,8 +62,8 @@ export default class Order extends React.Component {
     try{
       let response = await fetch(`${baseURL}/customer/add/name/contact/cell_phone/home_phone/alt_phone/email`)
       let data = await response.json()
-      let customersCopy = this.state.customers
-      this.setState([...customersCopy. data])
+
+      this.setState([this.state.customers. data])
     }
     catch(e){
       console.error(e)
@@ -76,7 +77,6 @@ export default class Order extends React.Component {
           customers={this.state.customers}
           setCustomer={this.setCustomer}
         />
-        <h1>Order</h1>
         <CustomerForm
           customer={this.state.customer}
           handleSubmit={this.handleSubmit}
