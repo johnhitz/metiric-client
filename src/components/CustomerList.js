@@ -5,12 +5,12 @@ export default class CustomerList extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      more: true
+      more: ""
     }
     this.moreOrLess = this.moreOrLess.bind(this)
   }
-  moreOrLess(){
-    this.setState({ more: !this.state.more })
+  moreOrLess(id){
+    this.setState({ more: id })
   }
   render(){
     console.log("This is more: ", this.state.more);
@@ -25,14 +25,22 @@ export default class CustomerList extends React.Component{
               return(
                 <li className=" list-group-item list-group-item-action"
                   key={_id}
-                  onClick={() => {this.props.setCustomer(customer)}}>
+                  onClick={() => {
+                    this.props.setCustomer(customer)
+                  }}>
                   <span>{name}</span>
                   <span>{contact}</span>
                     {
-                      this.state.more
-                      ? <button onClick={this.moreOrLess}>+</button>
+                      (_id !== this.state.more)
+                      ? <button className="btn btn-primary btn-sm" onClick={(event) => {
+                        event.stopPropagation()
+                        this.moreOrLess(_id)
+                      }}>+</button>
                       : <>
-                          <button onClick={this.moreOrLess}>-</button>
+                          <button onClick={(event) => {
+                            event.stopPropagation()
+                            this.moreOrLess("")
+                          }}>-</button>
                           <br />Cell #: {cell_phone}
                           <br />Home #: {home_phone}
                           <br />Email: {email}

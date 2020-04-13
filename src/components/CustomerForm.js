@@ -55,7 +55,11 @@ export default class CustomerForm extends React.Component {
     return(
       <>
         <h1>Customer Form</h1>
-        <form onSubmit={this.props.handleSubmit, this.clearState}>
+        <form onSubmit={(event) => {
+          event.preventDefault()
+          this.props.handleSubmit()
+          this.clearState()
+        }}>
           <div className="form-group">
             <label htmlFor="name"></label>
             <input
@@ -117,11 +121,15 @@ export default class CustomerForm extends React.Component {
             />
           </div>
           <button className="btn btn-primary"
-            onClick={this.clearState}
-          >Clear</button>
+            onClick={(event) => {
+              event.preventDefault()
+              this.clearState()
+            }}>Clear</button>
           <button className="btn btn-danger"
-            onClick={this.clearState}
-          >Delete Customer</button>
+            onClick={(event) => {
+              event.preventDefault()
+              this.clearState()
+            }}>Delete Customer</button>
 
           <input className="btn btn-primary" type="submit" value="Add Customer" />
         </form>

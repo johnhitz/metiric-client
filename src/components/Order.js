@@ -1,6 +1,8 @@
 import React from 'react'
 import CustomerForm from './CustomerForm'
 import CustomerList from './CustomerList'
+import ProductList from './ProductList'
+import OrderForm from './OrderForm'
 
 let baseURL = process.env.REACT_APP_BASEURL
 if(process.env.REACT_APP_BASEURL === 'dev') {
@@ -15,8 +17,10 @@ export default class Order extends React.Component {
     this.state = {
       customer: {},
       customers: [],
-      products: []
+      products: [],
+      order_items: []
     }
+    this.addItem = this.addItem.bind(this)
     this.setCustomer = this.setCustomer.bind(this)
     this.getCustomer = this.getCustomer.bind(this)
     this.getCustomers = this.getCustomers.bind(this)
@@ -25,6 +29,11 @@ export default class Order extends React.Component {
   componentDidMount(){
     this.getCustomers()
     this.getProducts()
+  }
+
+  addItem (item){
+    this.setState({order_items: [...this.state.order_items, item]})
+    console.log("I'v been called!");
   }
   async getCustomer(name){
   try {
@@ -57,19 +66,19 @@ export default class Order extends React.Component {
       console.error(e);
     }
   }
-  async handleSubmit(event){
-    event.preventDefault()
+  async handleSubmit(){
     try{
       let response = await fetch(`${baseURL}/customer/add/name/contact/cell_phone/home_phone/alt_phone/email`)
       let data = await response.json()
 
-      this.setState([this.state.customers. data])
+      this.setState([this.state.customers, data])
     }
     catch(e){
       console.error(e)
     }
   }
   render() {
+    console.log(`Order Items are: `, this.state.products);
     return (
       <>
         <CustomerList
@@ -80,66 +89,15 @@ export default class Order extends React.Component {
           customer={this.state.customer}
           handleSubmit={this.handleSubmit}
         />
+        <OrderForm
+          customer={this.state.customer}
+          order_items={this.state.order_items}
+        />
+        <ProductList
+          addItem={this.addItem}
+          products={this.state.products}
+        />
       </>
     )
   }
 }
-
-
-
-
-
-
-
-
-
-// import { useQuery, gql } from '@apollo/client'
-// import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-// import { ApolloProvider } from '@apollo/client'
-//
-//
-// const client = new ApolloClient({
-//   cache: new InMemoryCache(),
-//   link: new HttpLink({
-//     uri: 'http://localhost:3333/graphql',
-//   })
-// });
-//
-// let
-// const ORDER_QUERY = gql`
-//   query Order_Query {
-//     customer(name: "${name}") {
-//       name
-//       contact
-//       location
-//     },
-//     products {
-//       name
-//       rate_per_acer
-//       multiplier
-//       bill_unit
-//       price_per
-//     }
-//   }
-// `
-// function Data(){
-//   const { loading, error, data } = useQuery(ORDER_QUERY);
-//
-//   if (loading) return <p>Loading...</p>;
-//   if (error) return <p>Error :(</p>;
-//   console.log(data);
-//
-//   return (
-//     <p>WTF? Over!</p>
-//   )
-// }
-//
-// const Order = () => (
-//   <ApolloProvider client={client}>
-//     <h2>Order</h2>
-//     <Data />
-//   </ApolloProvider>
-// );
-//
-//
-// export default Order
