@@ -1,4 +1,5 @@
 import React from 'react'
+import './CustomerForm.css'
 
 export default class CustomerForm extends React.Component {
   constructor(props) {

@@ -24,8 +24,8 @@ export default class ProductList extends React.Component {
                   <>
                     <tr>
                       <td>{name}</td>
-                      <td>{name}</td>
-                      <td>{name}</td>
+                      <td>{bill_unit}</td>
+                      <td>{price_per_acre}</td>
                       <td>Total</td>
                       <td><a
                             href="#"

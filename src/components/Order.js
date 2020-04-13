@@ -30,11 +30,11 @@ export default class Order extends React.Component {
     this.getCustomers()
     this.getProducts()
   }
-
   addItem (item){
     this.setState({order_items: [...this.state.order_items, item]})
     console.log("I'v been called!");
   }
+
   async getCustomer(name){
   try {
     let response = await fetch(`${baseURL}/customer/name/${name}`)
