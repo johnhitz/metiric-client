@@ -9,13 +9,13 @@ export default class ProductList extends React.Component {
         <h1>Products & Services</h1>
           {
             products.map((product) => {
-              const { _id, name, bill_unit, price_per_acer} = product
+              const { _id, name, bill_unit, price_per_acre} = product
               return(
                 <>
                   <li key={_id} className="product">
                       <h4>{name}</h4>
                       <h4>{bill_unit}</h4>
-                      <h4>{price_per_acer}</h4>
+                      <h4>{price_per_acre}</h4>
                       <a
                         href="#"
                         className="btn btn-primary"
