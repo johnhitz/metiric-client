@@ -36,28 +36,18 @@ export default class OrderForm extends React.Component {
         >Add Acres</button>
         <table>
           <thead>
-            <tr>
-              <th colspan="2"><h1>Carroll Service</h1></th>
-            </tr>
-            <tr>
-              <th><h3>{name}</h3></th><br />
-            </tr>
-            <tr>
-              <th><h6>{contact}</h6></th><br />
-            </tr>
-            <tr>
-              <th><h6>{cell_phone}</h6></th><br />
-            </tr>
-            <tr>
-              <th><h6>{email}</h6></th><br />
-            </tr>
+            <tr><th colspan="2"><h1>Carroll Service</h1></th></tr>
+            <tr><th><h3>{name}</h3></th><br /></tr>
+            <tr><th><h6>{contact}</h6></th><br /></tr>
+            <tr><th><h6>{cell_phone}</h6></th><br /></tr>
+            <tr><th><h6>{email}</h6></th><br /></tr>
             </thead>
           <tbody>
             <tr>
-              <td>Product Name</td>
-              <td>Billing Units</td>
-              <td>Price Per acre</td>
-              <td>Cost for Application</td>
+              <td><h4>Product Name</h4></td>
+              <td><h4>Billing Units</h4></td>
+              <td><h4>Price Per acre</h4></td>
+              <td><h4>Cost for Application</h4></td>
             </tr>
             {
               this.props.order_items.map((item) => {

@@ -6,29 +6,42 @@ export default class ProductList extends React.Component {
     let products = this.props.products
     return(
       <>
-        <h1>Products & Services</h1>
-          {
-            products.map((product) => {
-              const { _id, name, bill_unit, price_per_acre} = product
-              return(
-                <>
-                  <li key={_id} className="product">
-                      <h4>{name}</h4>
-                      <h4>{bill_unit}</h4>
-                      <h4>{price_per_acre}</h4>
-                      <a
-                        href="#"
-                        className="btn btn-primary"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          this.props.addItem(product)
-                        }}
-                      >+</a>
-                  </li>
-                </>
-              )
-            })
-          }
+        <table>
+          <thead>
+          <tr>
+            <td><h4>Product</h4></td>
+            <td><h4>Billing Units</h4></td>
+            <td><h4>Price Per Acre</h4></td>
+            <td><h4>Cost of Application</h4></td>
+          </tr>
+          </thead>
+          <tbody>
+
+            {
+              products.map((product) => {
+                const { _id, name, bill_unit, price_per_acre} = product
+                return(
+                  <>
+                    <tr>
+                      <td>{name}</td>
+                      <td>{name}</td>
+                      <td>{name}</td>
+                      <td>Total</td>
+                      <td><a
+                            href="#"
+                            className="btn btn-primary"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              this.props.addItem(product)
+                            }}
+                          >+</a></td>
+                    </tr>
+                  </>
+                )
+              })
+            }
+          </tbody>
+        </table>
       </>
     )
   }
